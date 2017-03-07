@@ -1,0 +1,88 @@
+<h4>Current user</h4>
+
+{% if user.is_authenticated %}
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>email</th>
+            <th>is_superuser</th>
+            <th>is_staff</th>
+            <th>is_active</th>
+            <th>last_login</th>
+            <th>date_joined</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ user.pk }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.is_superuser }}</td>
+            <td>{{ user.is_staff }}</td>
+            <td>{{ user.is_active }}</td>
+            <td>{{ user.last_login }}</td>
+            <td>{{ user.date_joined }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% else %}
+    <p>Not logged in.</p>
+{% endif %}
+
+<h4>10 most recent logged in users</h4>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>email</th>
+        <th>is_superuser</th>
+        <th>is_staff</th>
+        <th>is_active</th>
+        <th>last_login</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr class="{% cycle 'djDebugOdd' 'djDebugEven' %}">
+            <td>{{ user.pk }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.is_superuser }}</td>
+            <td>{{ user.is_staff }}</td>
+            <td>{{ user.is_active }}</td>
+            <td>{{ user.last_login }}</td>
+            <td>
+                <form method="POST" action="{% url "djdt:userpanel-login" user.pk %}">
+                    {% if next %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% endif %}
+                    <button type="submit">login</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h4>Login as any user</h4>
+<form method="POST" action="{% url "djdt:userpanel-login-form" %}">
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+<h4>Logout all users</h4>
+<form method="POST" action="{% url "djdt:userpanel-logout" %}">
+    <button type="submit">Logout</button>
+</form>

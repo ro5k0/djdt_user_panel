@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+djdt_user_panel/__init__.py
+djdt_user_panel/apps.py
+djdt_user_panel/decorators.py
+djdt_user_panel/forms.py
+djdt_user_panel/panels.py
+djdt_user_panel/views.py
+djdt_user_panel.egg-info/PKG-INFO
+djdt_user_panel.egg-info/SOURCES.txt
+djdt_user_panel.egg-info/dependency_links.txt
+djdt_user_panel.egg-info/top_level.txt
+djdt_user_panel/templates/djdt_user_panel/panel.html
